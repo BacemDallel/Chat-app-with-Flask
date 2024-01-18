@@ -1,0 +1,47 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<form method="post" action="{{url_for('home')}}" class="d-flex flex-column justify-content-center align-items-center mb-3" >
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                {% if category == 'success' %}
+                                    <div class="alert alert-success text-center" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% elif category == 'error' %}
+                                    <div class="alert alert-danger text-center" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+    <h3>
+        Enter the Chat Room
+    </h3>
+            <div class="col-sm-4" >
+
+          {{ render_form(form, novalidate=True) }}
+
+          <a href="{{url_for('create_room')}}">
+              <button type="button" class="btn btn-primary d-inline-flex align-items-center" >
+                  Create Room
+              </button>
+          </a>
+
+                </div>
+
+
+
+
+</form>
+
+
+{% endblock %}
+{% include "footer.html" %}
